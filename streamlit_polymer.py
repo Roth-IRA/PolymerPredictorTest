@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import pickle as pkl
 import joblib
+import xgboost as xgb
 from sklearn.model_selection import train_test_split, KFold
 from xgboost import XGBRegressor # opted for XGBoost since it routinely outperforms most other algorithms in kaggle competitions
 from sklearn.metrics import mean_absolute_error # the competition uses a weighted MAE since it involves making predictions for multiple numeric variables
