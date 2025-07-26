@@ -44,7 +44,7 @@ def smiles_to_fp(smiles, radius=4, n_bits = 2048):
         # MorganGenerator transforms SMILES from text to numbers
          # The fingerprint is a binary array which identifies which features a polymer does and does not have
         bit_vect = AllChem.GetMorganFingerprintAsBitVect(mol, radius, nBits = 2048)
-        arr = np.zeros((n_bits,),dtype=np.unit8)
+        arr = np.zeros((n_bits,),dtype=np.uint8)
         DataStructs.ConvertToNumpyArray(bit_vect,arr)
         return arr
     else:
