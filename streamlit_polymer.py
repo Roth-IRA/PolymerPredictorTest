@@ -29,7 +29,9 @@ def smiles_to_fp(smiles, radius=4):
 
 user_input = smiles_to_fp(user_input)
 if user_input is not None:
-    prediction = model.predict(user_input)
-    st.write("Predicted Chem Properties: ", prediction)
+    st.write("Predicted Chem Properties: "
+    for key in model:
+        prediction = model[key].predict(user_input)
+        st.write(key," ", prediction)
 else:
     st.write("Please input a rdkit-recognized chemical structure!")
