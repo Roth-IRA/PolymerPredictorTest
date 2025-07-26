@@ -48,7 +48,7 @@ def smiles_to_fp(smiles, radius=4):
         return None # Returns None for invalid SMILES
 
 user_input_fp = smiles_to_fp(user_input)
-if user_input_fp is not None:
+if st.button("Predict Properties") and user_input_fp is not None:
     st.write("Predicted Chem Properties: ")
     
     predictionTg = st.session_state.modelTg.predict(user_input_fp)
