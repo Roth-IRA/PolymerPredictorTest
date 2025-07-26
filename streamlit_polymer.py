@@ -12,16 +12,25 @@ from rdkit.Chem import Descriptors
 from rdkit.Chem import AllChem
 from sklearn.impute import KNNImputer
 
-modelTg = XGBRegressor()
-modelTc = XGBRegressor()
-modelRg = XGBRegressor()
-modelFFV = XGBRegressor()
-modelDensity = XGBRegressor()
-modelTg = modelTg.load_model("modelTg.bin")
-modelTc = modelTc.load_model("modelTc.bin")
-modelRg = modelRg.load_model("modelRg.bin")
-modelFFV = modelFFV.load_model("modelFFV.bin")
-modelDensity = modelDensity.load_model("modelDensity.bin")
+if "modelTg" not in st.session_state:
+    st.session_state.modelTg = xgb.XGBRegressor()
+    st.session_state.modelTg.load_model("modelTg.bin")
+
+if "modelTc" not in st.session_state:
+    st.session_state.modelTc = xgb.XGBRegressor()
+    st.session_state.modelTc.load_model("modelTc.bin")
+
+if "modelRg" not in st.session_state:
+    st.session_state.modelRg = xgb.XGBRegressor()
+    st.session_state.modelRg.load_model("modelRg.bin")
+
+if "modelFFV" not in st.session_state:
+    st.session_state.modelFFV = xgb.XGBRegressor()
+    st.session_state.modelFFV.load_model("modelFFV.bin")
+
+if "modelDensity" not in st.session_state:
+    st.session_state.modelDensity = xgb.XGBRegressor()
+    st.session_state.modelDensity.load_model("modelDensity.bin")
 
 st.title("Polymer Prediction, Carl R.")
 
@@ -42,19 +51,19 @@ user_input_fp = smiles_to_fp(user_input)
 if user_input_fp is not None:
     st.write("Predicted Chem Properties: ")
     
-    predictionTg = modelTg.predict(user_input_fp)
+    predictionTg = st.session_state.modelTg.predict(user_input_fp)
     st.write("Tg: ", predictionTg)
     
-    predictionTc = modelTc.predict(user_input_fp)
+    predictionTc = st.session_state.modelTc.predict(user_input_fp)
     st.write("Tc: ", predictionTc)
     
-    predictionRg = modelRg.predict(user_input_fp)
+    predictionRg = st.session_state.modelRg.predict(user_input_fp)
     st.write("Rg: ", predictionRg)
     
-    predictionFFV = modelFFV.predict(user_input_fp)
+    predictionFFV = st.session_state.modelFFV.predict(user_input_fp)
     st.write("Tg: ", predictionFFV)
     
-    predictionDensity = modelDensity.predict(user_input_fp)
+    predictionDensity = st.session_state.modelDensity.predict(user_input_fp)
     st.write("Tg: ", predictionDensity)
     
 else:
