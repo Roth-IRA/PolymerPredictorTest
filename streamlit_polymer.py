@@ -10,11 +10,17 @@ from rdkit import Chem
 from rdkit.Chem import Descriptors
 from rdkit.Chem import AllChem
 from sklearn.impute import KNNImputer
-modelTg = model.load_model("modelTg.bin")
-modelTc = model.load_model("modelTc.bin")
-modelRg = model.load_model("modelRg.bin")
-modelFFV = model.load_model("modelFFV.bin")
-modelDensity = model.load_model("modelDensity.bin")
+
+modelTg = XGBRegressor()
+modelTc = XGBRegressor()
+modelRg = XGBRegressor()
+modelFFV = XGBRegressor()
+modelDensity = XGBRegressor()
+modelTg = modelTg.load_model("modelTg.bin")
+modelTc = modelTc.load_model("modelTc.bin")
+modelRg = modelRg.load_model("modelRg.bin")
+modelFFV = modelFFV.load_model("modelFFV.bin")
+modelDensity = modelDensity.load_model("modelDensity.bin")
 
 st.title("Polymer Prediction, Carl R.")
 
