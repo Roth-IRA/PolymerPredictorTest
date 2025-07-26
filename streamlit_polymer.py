@@ -10,7 +10,11 @@ from rdkit import Chem
 from rdkit.Chem import Descriptors
 from rdkit.Chem import AllChem
 from sklearn.impute import KNNImputer
-model = joblib.load("xgboost_models.pkl")
+modelTg = model.load_model("modelTg.bin")
+modelTc = model.load_model("modelTc.bin")
+modelRg = model.load_model("modelRg.bin")
+modelFFV = model.load_model("modelFFV.bin")
+modelDensity = model.load_model("modelDensity.bin")
 
 st.title("Polymer Prediction, Carl R.")
 
@@ -30,8 +34,21 @@ def smiles_to_fp(smiles, radius=4):
 user_input_fp = smiles_to_fp(user_input)
 if user_input_fp is not None:
     st.write("Predicted Chem Properties: ")
-    for key in model:
-        prediction = model[key].predict(user_input_fp)
-        st.write(key,": ", prediction)
+    
+    predictionTg = modelTg.predict(user_input_fp)
+    st.write("Tg: ", predictionTg)
+    
+    predictionTc = modelTc.predict(user_input_fp)
+    st.write("Tc: ", predictionTc)
+    
+    predictionRg = modelRg.predict(user_input_fp)
+    st.write("Rg: ", predictionRg)
+    
+    predictionFFV = modelFFV.predict(user_input_fp)
+    st.write("Tg: ", predictionFFV)
+    
+    predictionDensity = modelDensity.predict(user_input_fp)
+    st.write("Tg: ", predictionDensity)
+    
 else:
     st.write("Please input a rdkit-recognized chemical structure!")
