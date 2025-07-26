@@ -59,19 +59,19 @@ if st.button("Predict Properties") and user_input_fp is not None:
     st.write("Predicted Chem Properties: ")
     
     predictionTg = st.session_state.modelTg.predict(user_input_fp)
-    st.write("Tg: ", predictionTg)
+    st.write("Tg: {predictionTg:.2f}")
     
     predictionTc = st.session_state.modelTc.predict(user_input_fp)
-    st.write("Tc: ", predictionTc)
+    st.write("Tc: {predictionTc:.2f}")
     
     predictionRg = st.session_state.modelRg.predict(user_input_fp)
-    st.write("Rg: ", predictionRg)
+    st.write("Rg: {predictionRg:.2f}")
     
     predictionFFV = st.session_state.modelFFV.predict(user_input_fp)
-    st.write("Tg: ", predictionFFV)
+    st.write("FFV: {predictionFFV:.2f}")
     
     predictionDensity = st.session_state.modelDensity.predict(user_input_fp)
-    st.write("Tg: ", predictionDensity)
+    st.write("Density: {predictionDensity:.2f}")
     
 else:
     st.write("Please input a rdkit-recognized chemical structure!")
