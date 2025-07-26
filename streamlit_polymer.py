@@ -27,7 +27,7 @@ def smiles_to_fp(smiles, radius=4):
     else:
         return None # Returns None for invalid SMILES
 
-user_input = smiles_to_fp(user_input.to_list())
+user_input = smiles_to_fp(user_input)
 if user_input is not None:
     prediction = model.predict(user_input)
     st.write("Predicted Chem Properties: ", prediction)
