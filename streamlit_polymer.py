@@ -75,3 +75,11 @@ if st.button("Predict Properties") and user_input_fp is not None:
     
 else:
     st.write("Please input a rdkit-recognized chemical structure!")
+
+import hashlib
+
+for fname in ["modelTg.bin","modelTc.bin","modelRg.bin","modelFFV.bin","modelDensity.bin"]:
+    data = open(fname,"rb").read()
+    st.write(fname, hashlib.md5(data).hexdigest())
+
+
