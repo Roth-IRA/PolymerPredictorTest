@@ -35,6 +35,11 @@ if "modelDensity" not in st.session_state:
 st.title("Polymer Prediction, Carl R.")
 
 st.write("### Input valid SMILES notation for a chemical species to get chemical property predictions!")
+st.write("Tg: Glass transition temperature (Celsius)")
+st.write("Tc: Thermal conductivity (W/m*K")
+st.write("Rg: Radius of gyration")
+st.write("FFV: Fractional free volume")
+st.write("Density: Polymer density (g*cm^-3")
 user_input = st.text_input("SMILES:")
 
 def smiles_to_fp(smiles, radius=4, n_bits = 2048):
@@ -75,11 +80,5 @@ if st.button("Predict Properties") and user_input_fp is not None:
     
 else:
     st.write("Please input a rdkit-recognized chemical structure!")
-
-import hashlib
-
-for fname in ["modelTg.bin","modelTc.bin","modelRg.bin","modelFFV.bin","modelDensity.bin"]:
-    data = open(fname,"rb").read()
-    st.write(fname, hashlib.md5(data).hexdigest())
 
 
