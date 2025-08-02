@@ -84,5 +84,5 @@ else:
 
 molecule = Chem.MolFromSmiles(user_input)
 if molecule is not None:
-    img = Draw.MolToImage(molecule)
+    img = Draw.MolToSVG(molecule)
     st.image(img,caption=f"Molecule: {user_input}", use_column_width=True)
