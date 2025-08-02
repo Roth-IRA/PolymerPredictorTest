@@ -84,4 +84,4 @@ molecule = Chem.MolFromSmiles(user_input)
 if molecule is not None:
     invariants = AllChem.GetFeatureInvariants(molecule)
     st.write(invariants)
-    st.write(molecule)
+    st.image(molecule)
