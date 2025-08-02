@@ -1,4 +1,3 @@
-!sudo apt-get install libxrender1
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -9,8 +8,7 @@ from sklearn.model_selection import train_test_split, KFold
 from xgboost import XGBRegressor # opted for XGBoost since it routinely outperforms most other algorithms in kaggle competitions
 from sklearn.metrics import mean_absolute_error # the competition uses a weighted MAE since it involves making predictions for multiple numeric variables
 from rdkit import Chem, DataStructs
-from rdkit.Chem.Draw import rdMolDraw2D
-from rdkit.Chem import Descriptors, AllChem, Draw
+from rdkit.Chem import Descriptors, AllChem, ChemicalFeatures
 from sklearn.impute import KNNImputer
 
 if "modelTg" not in st.session_state:
@@ -84,8 +82,5 @@ else:
 
 molecule = Chem.MolFromSmiles(user_input)
 if molecule is not None:
-    Chem.Draw.MolToFile(molecule, 'molecule.png', width=900)
-    mol_image = Image.open('molecule.png')
-    st.image(mol_image)
-    #img = Draw.MolToSVG(molecule)
-    #st.image(img,caption=f"Molecule: {user_input}", use_column_width=True)
+    invariants = AllChem.GetFeatureInvariants(molecule)
+    st.write(invariants)
