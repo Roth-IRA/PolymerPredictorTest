@@ -10,7 +10,6 @@ from sklearn.metrics import mean_absolute_error # the competition uses a weighte
 from rdkit import Chem, DataStructs
 from rdkit.Chem import Descriptors
 from rdkit.Chem import AllChem
-from rdkit.Chem import Draw
 from sklearn.impute import KNNImputer
 
 if "modelTg" not in st.session_state:
@@ -84,5 +83,8 @@ else:
 
 molecule = Chem.MolFromSmiles(user_input)
 if molecule is not None:
-    img = Draw.MolToSVG(molecule)
-    st.image(img,caption=f"Molecule: {user_input}", use_column_width=True)
+    Chem.Draw.MolToFile(molecule, 'molecule.png', width=900)
+    mol_image = Image.open('molecule.png')
+    st.image(mol_image)
+    #img = Draw.MolToSVG(molecule)
+    #st.image(img,caption=f"Molecule: {user_input}", use_column_width=True)
