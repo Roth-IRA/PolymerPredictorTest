@@ -10,6 +10,7 @@ from sklearn.metrics import mean_absolute_error # the competition uses a weighte
 from rdkit import Chem, DataStructs
 from rdkit.Chem import Descriptors
 from rdkit.Chem import AllChem
+from rdkit.Chem import Draw
 from sklearn.impute import KNNImputer
 
 if "modelTg" not in st.session_state:
@@ -81,4 +82,7 @@ if st.button("Predict Properties") and user_input_fp is not None:
 else:
     st.write("Please input a rdkit-recognized chemical structure!")
 
-
+molecule = Chem.MolFromSmiles(user_input)
+if molecule is not None:
+    img = Draw.MolToImage(molecule)
+    st.image(img,caption=f"Molecule: {user_input}", use_column_width=True)
