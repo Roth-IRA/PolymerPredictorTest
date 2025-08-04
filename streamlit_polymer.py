@@ -8,7 +8,8 @@ from sklearn.model_selection import train_test_split, KFold
 from xgboost import XGBRegressor # opted for XGBoost since it routinely outperforms most other algorithms in kaggle competitions
 from sklearn.metrics import mean_absolute_error # the competition uses a weighted MAE since it involves making predictions for multiple numeric variables
 from rdkit import Chem, DataStructs
-from rdkit.Chem import Descriptors, AllChem, ChemicalFeatures
+from rdkit.Chem import Descriptors, AllChem, ChemicalFeatures, rdFingerprintGenerator
+from rdkit.Chem.rdFingerprintGenerator import AdditionalOutput
 from sklearn.impute import KNNImputer
 
 if "modelTg" not in st.session_state:
@@ -82,6 +83,16 @@ else:
 
 molecule = Chem.MolFromSmiles(user_input)
 if molecule is not None:
-    invariants = AllChem.GetFeatureInvariants(molecule)
-    st.write(invariants)
-    st.image(molecule)
+    #invariants = AllChem.GetFeatureInvariants(molecule)
+    #st.write(invariants)
+    #st.image(molecule)
+    fpgen = rdFingerprintGenerator.GetRDKitFingerprintGenerator()
+    ao = AdditionalOutput()
+    ao.AllocateAtomCounts()
+    ao.AllocateAtomToBits()
+    ao.AllocateBitInfoMap()
+    atom_to_bits = ao.atomToBits
+    fp = fpgen.GetFingerprint(molecule, additionalOutput = ao)
+    st.write(fp)
+    
+    
