@@ -62,7 +62,7 @@ user_input_fp = smiles_to_fp(user_input)
 if user_input_fp is not None:
     user_input_fp = user_input_fp.reshape(1,-1)
     
-if st.button("Predict Properties") and user_input_fp is not None:
+if user_input_fp is not None:
     st.write("Predicted Chem Properties: ")
     
     predictionTg = st.session_state.modelTg.predict(user_input_fp)
@@ -84,7 +84,7 @@ else:
     st.write("Please input a rdkit-recognized chemical structure!")
 
 molecule = Chem.MolFromSmiles(user_input)
-if st.button("Predict Properties") and molecule is not None:
+if molecule is not None:
     #st.image(molecule)
     bitInfo = {}
     fp = AllChem.GetMorganFingerprintAsBitVect(molecule, radius=4, nBits=1024, bitInfo=bitInfo)
@@ -97,6 +97,4 @@ if st.button("Predict Properties") and molecule is not None:
                 atom = molecule.GetAtomWithIdx(atom_idx)
                 symbol = atom.GetSymbol()
                 st.write(f"Bit {bit_id} set by atom {atom_idx} ({symbol}) with radius {radius}")
-
-
     
