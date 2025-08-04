@@ -85,10 +85,8 @@ else:
 
 molecule = Chem.MolFromSmiles(user_input)
 if molecule is not None:
-    #invariants = AllChem.GetFeatureInvariants(molecule)
-    #st.write(invariants)
     #st.image(molecule)
-    fp = AllChem.GetMorganFingerprintAsBitVect(mol, radius=4, nBits=1024, bitInfo=bitInfo)
+    fp = AllChem.GetMorganFingerprintAsBitVect(molecule, radius=4, nBits=1024, bitInfo=bitInfo)
     for bit, info in bitInfo.items():
         st.write(f"Bit {bit} set by atom {info[0][0]} with radius {info[0][1]}")
     
