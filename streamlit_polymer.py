@@ -90,5 +90,13 @@ if molecule is not None:
     fp = AllChem.GetMorganFingerprintAsBitVect(molecule, radius=4, nBits=1024, bitInfo=bitInfo)
     for bit, info in bitInfo.items():
         st.write(f"Bit {bit} set by atom {info[0][0]} with radius {info[0][1]}")
-    
+        
+    for bit_id in fp.GetOnBits():
+        if bit_id in bitInfo:
+            for atom_idx, radius in bitInfo[bit_id]:
+                atom = molecule.GetAtomWithIdx(atom_idx)
+                symbol = atom.GetSymbol()
+                print(f"Bit {bit_id} set by atom {atom_idx} ({symbol}) with radius {radius}")
+
+
     
