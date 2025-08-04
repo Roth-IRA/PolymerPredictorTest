@@ -1,3 +1,4 @@
+# Package Imports
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -5,13 +6,14 @@ import pickle as pkl
 import joblib
 import xgboost as xgb
 from sklearn.model_selection import train_test_split, KFold
-from xgboost import XGBRegressor # opted for XGBoost since it routinely outperforms most other algorithms in kaggle competitions
-from sklearn.metrics import mean_absolute_error # the competition uses a weighted MAE since it involves making predictions for multiple numeric variables
+from xgboost import XGBRegressor 
+from sklearn.metrics import mean_absolute_error
 from rdkit import Chem, DataStructs
 from rdkit.Chem import Descriptors, AllChem, ChemicalFeatures, rdFingerprintGenerator
 from rdkit.Chem.rdFingerprintGenerator import AdditionalOutput
 from sklearn.impute import KNNImputer
 
+# Loading Models
 if "modelTg" not in st.session_state:
     st.session_state.modelTg = xgb.XGBRegressor()
     st.session_state.modelTg.load_model("modelTg.bin")
@@ -86,13 +88,8 @@ if molecule is not None:
     #invariants = AllChem.GetFeatureInvariants(molecule)
     #st.write(invariants)
     #st.image(molecule)
-    fpgen = rdFingerprintGenerator.GetRDKitFingerprintGenerator()
-    ao = AdditionalOutput()
-    ao.AllocateAtomCounts()
-    ao.AllocateAtomToBits()
-    ao.AllocateBitInfoMap()
-    atom_to_bits = ao.atomToBits
-    fp = fpgen.GetFingerprint(molecule, additionalOutput = ao)
-    st.write(fp)
+    fp = AllChem.GetMorganFingerprintAsBitVect(mol, radius=4, nBits=1024, bitInfo=bitInfo)
+    for bit, info in bitInfo.items():
+        st.write(f"Bit {bit} set by atom {info[0][0] with radius {info[0][1]}")
     
     
