@@ -90,6 +90,6 @@ if molecule is not None:
     #st.image(molecule)
     fp = AllChem.GetMorganFingerprintAsBitVect(mol, radius=4, nBits=1024, bitInfo=bitInfo)
     for bit, info in bitInfo.items():
-        st.write(f"Bit {bit} set by atom {info[0][0] with radius {info[0][1]}")
+        st.write(f"Bit {bit} set by atom {info[0][0]} with radius {info[0][1]}")
     
     
