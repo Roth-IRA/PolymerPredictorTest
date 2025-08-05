@@ -63,7 +63,7 @@ if user_input_fp is not None:
     user_input_fp = user_input_fp.reshape(1,-1)
     
 if user_input_fp is not None:
-    st.write("Predicted Chem Properties: ")
+    st.subheader("Predicted Chem Properties")
     
     predictionTg = st.session_state.modelTg.predict(user_input_fp)
     st.write(f"Tg: {predictionTg}")
@@ -83,15 +83,13 @@ if user_input_fp is not None:
 else:
     st.write("Please input a rdkit-recognized chemical structure!")
 
+st.subheader("Fingerprint Substructures")
 molecule = Chem.MolFromSmiles(user_input)
 if molecule is not None:
-    #st.image(molecule)
     bitInfo = {}
     fp = AllChem.GetMorganFingerprintAsBitVect(molecule, radius=4, nBits=1024, bitInfo=bitInfo)
-    #for bit, info in bitInfo.items():
-        #st.write(f"Bit {bit} set by atom {info[0][0]} with radius {info[0][1]}")
         
-    for bit_id in fp.GetOnBits():
+    for bit_id in fp.GetOnBits(): # The bitInfo parameter enables more interpretability by providing information on which atoms make up each bit/substructure
         if bit_id in bitInfo:
             for atom_idx, radius in bitInfo[bit_id]:
                 atom = molecule.GetAtomWithIdx(atom_idx)
