@@ -45,6 +45,7 @@ st.write("Rg: Radius of gyration")
 st.write("FFV: Fractional free volume")
 st.write("Density: Polymer density (g*cm^3)")
 user_input = st.text_input("SMILES:")
+molecule = Chem.MolFromSmiles(user_input)
 
 def smiles_to_fp(smiles, radius=4, n_bits = 2048):
     mol = Chem.MolFromSmiles(smiles) # this creates a molecule object from SMILES notation (used to make sure the polymer is valid)
@@ -61,6 +62,10 @@ def smiles_to_fp(smiles, radius=4, n_bits = 2048):
 
 user_input_fp = smiles_to_fp(user_input)
 
+if molecule is not None:
+        img = Draw.MolToImage(molecule)
+        st.image(img)
+    
 if user_input_fp is not None:
     user_input_fp = user_input_fp.reshape(1,-1)
     
@@ -86,7 +91,6 @@ else:
     st.write("Please input a rdkit-recognized chemical structure!")
 
 st.subheader("Fingerprint Substructures")
-molecule = Chem.MolFromSmiles(user_input)
 if molecule is not None:
     bitInfo = {}
     fp = AllChem.GetMorganFingerprintAsBitVect(molecule, radius=4, nBits=1024, bitInfo=bitInfo)
