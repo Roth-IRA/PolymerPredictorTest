@@ -90,6 +90,26 @@ if user_input_fp is not None:
 else:
     st.write("Please input a rdkit-recognized chemical structure!")
 
+st.subheader("Feature Importance: Top 3 Substructures (Bits) per Prediction")
+
+    TgImportances = st.session_state.modelTg.feature_importances_
+    TcImportances = st.session_state.modelTc.feature_importances_
+    RgImportances = st.session_state.modelRg.feature_importances_
+    FFVImportances = st.session_state.modelFFV.feature_importances_
+    DensityImportances = st.session_state.modelDensity.feature_importances_
+
+    TgSorted = np.argsort(TgImportances)[::-1]
+    TcSorted = np.argsort(TcImportances)[::-1]
+    RgSorted = np.argsort(RgImportances)[::-1]
+    FFVSorted = np.argsort(FFVImportances)[::-1]
+    DensitySorted = np.argsort(DensityImportances)[::-1]
+
+st.write(f"Tg: {TgSorted}[0]}, {TgSorted[1]}, {TgSorted[2]}")
+st.write(f"Tc: {TcSorted}[0]}, {TcSorted[1]}, {TcSorted[2]}")
+st.write(f"Rg: {RgSorted}[0]}, {RgSorted[1]}, {RgSorted[2]}")
+st.write(f"FFV: {FFVSorted}[0]}, {FFVSorted[1]}, {FFVSorted[2]}")
+st.write(f"Density: {DensitySorted}[0]}, {DensitySorted[1]}, {DensitySorted[2]}")
+
 st.subheader("Fingerprint Substructures")
 if molecule is not None:
     bitInfo = {}
