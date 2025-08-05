@@ -104,11 +104,11 @@ RgSorted = np.argsort(RgImportances)[::-1]
 FFVSorted = np.argsort(FFVImportances)[::-1]
 DensitySorted = np.argsort(DensityImportances)[::-1]
 
-st.write(f"Tg: {TgSorted}[0]}, {TgSorted[1]}, {TgSorted[2]}")
-st.write(f"Tc: {TcSorted}[0]}, {TcSorted[1]}, {TcSorted[2]}")
-st.write(f"Rg: {RgSorted}[0]}, {RgSorted[1]}, {RgSorted[2]}")
-st.write(f"FFV: {FFVSorted}[0]}, {FFVSorted[1]}, {FFVSorted[2]}")
-st.write(f"Density: {DensitySorted}[0]}, {DensitySorted[1]}, {DensitySorted[2]}")
+st.write(f"Tg: {TgSorted[0]}, {TgSorted[1]}, {TgSorted[2]}")
+st.write(f"Tc: {TcSorted[0]}, {TcSorted[1]}, {TcSorted[2]}")
+st.write(f"Rg: {RgSorted[0]}, {RgSorted[1]}, {RgSorted[2]}")
+st.write(f"FFV: {FFVSorted[0]}, {FFVSorted[1]}, {FFVSorted[2]}")
+st.write(f"Density: {DensitySorted[0]}, {DensitySorted[1]}, {DensitySorted[2]}")
 
 st.subheader("Fingerprint Substructures")
 if molecule is not None:
