@@ -12,6 +12,8 @@ from rdkit import Chem, DataStructs
 from rdkit.Chem import Descriptors, AllChem, ChemicalFeatures, rdFingerprintGenerator
 from rdkit.Chem.rdFingerprintGenerator import AdditionalOutput
 from sklearn.impute import KNNImputer
+from PIL import Image
+import io
 
 # Loading Models
 if "modelTg" not in st.session_state:
