@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split, KFold
 from xgboost import XGBRegressor 
 from sklearn.metrics import mean_absolute_error
 from rdkit import Chem, DataStructs
-from rdkit.Chem import Descriptors, AllChem, ChemicalFeatures, rdFingerprintGenerator
+from rdkit.Chem import Descriptors, AllChem, ChemicalFeatures, rdFingerprintGenerator, Draw
 from rdkit.Chem.rdFingerprintGenerator import AdditionalOutput
 from sklearn.impute import KNNImputer
 from PIL import Image
